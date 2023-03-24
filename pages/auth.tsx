@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import Input from '@/components/Input';
 
 const Auth = () => {
@@ -11,6 +12,19 @@ const Auth = () => {
       currentVariant === 'login' ? 'register' : 'login'
     );
   }, []);
+
+  const register = React.useCallback(async () => {
+    try {
+      await axios.post('/api/register', {
+        email,
+        name,
+        password,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   const handleOnChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
