@@ -2,13 +2,11 @@ import * as React from 'react';
 import axios from 'axios';
 import Input from '@/components/Input';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/router';
 
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
 
 const Auth = () => {
-  const router = useRouter();
   const [email, setEmail] = React.useState('');
   const [name, setName] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -24,14 +22,12 @@ const Auth = () => {
       await signIn('credentials', {
         email,
         password,
-        redirect: false,
-        callbackUrl: '/',
+        callbackUrl: '/profiles',
       });
-      router.push('/');
     } catch (error) {
       console.log(error);
     }
-  }, [email, password, router]);
+  }, [email, password]);
 
   const register = React.useCallback(async () => {
     try {
@@ -46,8 +42,10 @@ const Auth = () => {
     }
   }, [email, name, password, login]);
 
-  const handleSignInGitHub = () => signIn('github', { callbackUrl: '/' });
-  const handleSignInGoogle = () => signIn('google', { callbackUrl: '/' });
+  const handleSignInGitHub = () =>
+    signIn('github', { callbackUrl: '/profiles' });
+  const handleSignInGoogle = () =>
+    signIn('google', { callbackUrl: '/profiles' });
 
   const handleOnChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
