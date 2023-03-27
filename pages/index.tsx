@@ -1,3 +1,4 @@
+import Billboard from '@/components/Billboard';
 import Navbar from '@/components/Navbar';
 import NavbarItem from '@/components/NavbarItem';
 import useCurrentUser from '@/hooks/useCurrentUser';
@@ -31,6 +32,7 @@ export default function Home() {
         <NavbarItem label="My List" />
         <NavbarItem label="Browse by Languages" />
       </Navbar>
+      <Billboard />
     </>
   );
 }
